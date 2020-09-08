@@ -24,8 +24,15 @@ const captchaValidate = (req,res,next) => {
 
 };
 
+const generateCookie = (token) => {
+    let result = token.split("=");
+    return result[1];
+};
+
 const cookieCheck = (req,res,next) => {
-    let token = req.cookies.aloha
+    console.log(req.headers.cookie);
+    let token = generateCookie(req.headers.cookie);
+
     if (token) {
         res.status(200).json({token: token});
     }else {
@@ -34,7 +41,8 @@ const cookieCheck = (req,res,next) => {
 }
 
 Router.post('/login', captchaValidate,(req,res,next) => {
-    res.cookie('aloha', "owl-king", { httpOnly: true, secure:false });
+    // res.cookie('aloha', "owl-king", { httpOnly: true, secure:false });
+    res.setHeader("set-cookie", ["fromserver=1"])
     res.status(200).json({message: "Cookie has been set"});
 });
 
