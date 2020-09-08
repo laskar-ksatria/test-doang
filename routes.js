@@ -47,6 +47,8 @@ Router.post('/login', captchaValidate,(req,res,next) => {
 
 Router.get('/clearcookie', (req,res,next) => {
     res.clearCookie('aloha');
+    res.clearCookie('myexchange');
+    res.clearCookie('fromserver');
     res.status(200).json({message: "Cookie has been clear"})
 });
 
