@@ -31,7 +31,7 @@ const generateCookie = (token) => {
 
 const cookieCheck = (req,res,next) => {
     let token = res.cookies.aloha
-
+    console.log(req.cookies);
     if (token) {
         res.status(200).json({token: token});
     }else {
@@ -40,7 +40,7 @@ const cookieCheck = (req,res,next) => {
 }
 
 Router.post('/login', captchaValidate,(req,res,next) => {
-    res.cookie('aloha', "owl-king", { httpOnly: true, maxAge: 1000, sameSite: "none", });
+    res.cookie('aloha', "owl-king", { maxAge: 1000, sameSite: "strict", });
     // res.setHeader("set-cookie", ["fromserver=1"])
     res.status(200).json({message: "Cookie has been set"});
 });
