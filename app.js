@@ -7,12 +7,13 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT;
 
-app.use(cors({ cookie: true, origin: 'http://localhost:3000' }));
+app.use(cors({ credentials: true, origin: ['http://localhost:3000', 'http://localhost:3001'] }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 app.get('/gettoken', (req,res,next) => {
+    console.log('Masuk token');
     let token = "test-token";
     res.cookie('testcookie', token);
     res.status(200).json({message: "Cookie has been set"})
