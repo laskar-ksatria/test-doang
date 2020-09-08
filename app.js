@@ -6,6 +6,8 @@ const app = express();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT;
+const http = require('http');
+const server = http.createServer(app);
 
 app.use(cors({ credentials: true, origin: ['http://localhost:3000', 'http://localhost:3001'] }));
 app.use(cookieParser());
@@ -34,4 +36,4 @@ app.get('/cleartoken',  (req,res,next) => {
     res.status(200).json({message: "Cookie has been clear"})
 })
 
-app.listen(PORT, () => console.log(`Server started on ${PORT}`));
+server.listen(PORT, () => console.log(`Server started on ${PORT}`));
