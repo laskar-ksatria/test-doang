@@ -40,7 +40,7 @@ const cookieCheck = (req,res,next) => {
 }
 
 Router.post('/login', captchaValidate,(req,res,next) => {
-    res.cookie('aloha', "owl-king", { maxAge: 1000, sameSite: 'lax'});
+    res.cookie('aloha', "owl-king", { httpOnly: true,maxAge: 1000, sameSite: 'lax'});
     // res.setHeader("set-cookie", ["fromserver=1"])
     res.status(200).json({message: "Cookie has been set"});
 });
