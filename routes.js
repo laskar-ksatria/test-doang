@@ -34,7 +34,7 @@ const cookieCheck = (req,res,next) => {
 }
 
 Router.post('/login', captchaValidate,(req,res,next) => {
-    res.cookie('aloha', "owl-king");
+    res.cookie('aloha', "owl-king", { httpOnly: true, secure:false });
     res.status(200).json({message: "Cookie has been set"});
 });
 
