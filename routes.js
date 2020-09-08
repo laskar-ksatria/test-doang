@@ -30,8 +30,8 @@ const generateCookie = (token) => {
 };
 
 const cookieCheck = (req,res,next) => {
-    let token = res.cookies.aloha
     console.log(req.cookies);
+    let token = req.cookies.aloha
     if (token) {
         res.status(200).json({token: token});
     }else {
