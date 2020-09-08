@@ -15,7 +15,7 @@ app.use(express.urlencoded({extended: false}));
 app.get('/gettoken', (req,res,next) => {
     console.log('Masuk token');
     let token = "test-token";
-    res.cookie('testcookie', token);
+    res.cookie('testcookie', token, {secure: false});
     res.status(200).json({message: "Cookie has been set"})
 });
 
