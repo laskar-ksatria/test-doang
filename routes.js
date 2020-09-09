@@ -33,7 +33,8 @@ const generateCookie = (token) => {
 
 const cookieCheck = (req,res,next) => {
 
-    nodeCookie.get(req, "aloha")
+    let token = nodeCookie.get(req, "aloha");
+    res.status(200).json({token})
     // console.log(req.cookies);
     // let token = req.cookies.aloha
     // if (token) {
