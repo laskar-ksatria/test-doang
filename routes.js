@@ -1,6 +1,7 @@
 const express = require('express');
 const Router = express.Router();
 const Recaptcha = require('recaptcha-v2').Recaptcha;
+const nodeCookie = require('node-cookie');
 
 const PUBLIC_KEY = process.env.PUBLIC_KEY;
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -31,18 +32,22 @@ const generateCookie = (token) => {
 };
 
 const cookieCheck = (req,res,next) => {
-    console.log(req.cookies);
-    let token = req.cookies.aloha
-    if (token) {
-        res.status(200).json({token: token});
-    }else {
-        res.status(400).json({message: "Cookie is not valid"})
-    }
+
+    nodeCookie.get(req, "aloha")
+    // console.log(req.cookies);
+    // let token = req.cookies.aloha
+    // if (token) {
+    //     res.status(200).json({token: token});
+    // }else {
+    //     res.status(400).json({message: "Cookie is not valid"})
+    // }
 }
 
 Router.post('/login', captchaValidate,(req,res,next) => {
-    res.cookie('aloha', "owl-king");
-    // res.setHeader("set-cookie", ["fromserver=1"])
+
+    nodeCookie.create(res, "aloha", "owl-king")
+    // res.cookie('aloha', "owl-king");
+    // // res.setHeader("set-cookie", ["fromserver=1"])
     res.status(200).json({message: "Cookie has been set"});
 });
 
@@ -50,6 +55,7 @@ Router.get('/clearcookie', (req,res,next) => {
     res.clearCookie('aloha');
     res.clearCookie('myexchange');
     res.clearCookie('fromserver');
+    nodeCookie.clear(res, 'aloha')
     res.status(200).json({message: "Cookie has been clear"})
 });
 
