@@ -7,7 +7,6 @@ const PUBLIC_KEY = process.env.PUBLIC_KEY;
 const SECRET_KEY = process.env.SECRET_KEY;
 
 const captchaValidate = (req,res,next) => {
-    console.log(req.body.captcha)
     var data = {
 		remoteip:  req.connection.remoteAddress,
 		response:  req.body.captcha,
@@ -34,6 +33,7 @@ const generateCookie = (token) => {
 const cookieCheck = (req,res,next) => {
 
     let token = nodeCookie.get(req, "aloha");
+    console.log(token)
     res.status(200).json({token})
     // console.log(req.cookies);
     // let token = req.cookies.aloha
