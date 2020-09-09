@@ -16,4 +16,3 @@ app.get('/', (req, res) => res.status(200).json({message: "We are connected"}))
 app.use(require('./routes'));
 
 app.listen(PORT, () => console.log(`Server started on ${PORT}`));
-

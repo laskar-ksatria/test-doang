@@ -6,9 +6,10 @@ const PUBLIC_KEY = process.env.PUBLIC_KEY;
 const SECRET_KEY = process.env.SECRET_KEY;
 
 const captchaValidate = (req,res,next) => {
+    console.log(req.body.captcha)
     var data = {
 		remoteip:  req.connection.remoteAddress,
-		response:  req.body.recaptcha,
+		response:  req.body.captcha,
 		secret: SECRET_KEY
     }
     var recaptcha = new Recaptcha(PUBLIC_KEY, SECRET_KEY, data);
